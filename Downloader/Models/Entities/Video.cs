@@ -9,11 +9,7 @@ namespace StreamSearch.Models.Entities
 {
     public abstract class Video : Entity
     {
-        //[Index]
         public string Page { get; set; }
-        //[Index]
-        public string Link { get; set; }
-        //[Index]
         public string Title { get; set; }
         public string Cover { get; set; }
         public string Synopsis { get; set; }

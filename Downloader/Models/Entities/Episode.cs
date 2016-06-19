@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StreamSearch.Models.Entities
 {
-    public class Episode : Video
+    public class Episode : Entity
     {
         public int Order { get; set; }
         public string Page { get; set; }
@@ -19,21 +19,31 @@ namespace StreamSearch.Models.Entities
         [Required]
         public virtual Season Season { get; set; }
 
+        [NotMapped]
         public Show Show
         {
             get { return Season.Show; }
         }
 
+        [NotMapped]
+        public string Cover
+        {
+            get { return Show.Cover; }
+        }
+
+        [NotMapped]
         public ICollection<Actor> Actors
         {
             get { return Show.Actors; }
         }
 
+        [NotMapped]
         public ICollection<Genre> Genres
         {
             get { return Show.Genres; }
         }
 
+        [NotMapped]
         public ICollection<Director> Directors
         {
             get { return Show.Directors; }

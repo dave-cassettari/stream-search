@@ -10,8 +10,8 @@ namespace StreamSearch.Models.Entities
 {
     public class Show : Video
     {
-        public int YearStart { get; set; }
-        public int YearFinish { get; set; }
+        public int? YearStart { get; set; }
+        public int? YearFinish { get; set; }
 
         public virtual ICollection<Season> Seasons { get; set; }
 

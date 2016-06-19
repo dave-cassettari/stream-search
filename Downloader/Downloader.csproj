@@ -67,7 +67,7 @@
     <Compile Include="Models\Entities\Episode.cs" />
     <Compile Include="Models\Entities\Actor.cs" />
     <Compile Include="Models\Entities\IMeta.cs" />
-    <Compile Include="Models\Entities\Media.cs" />
+    <Compile Include="Models\Entities\Movie.cs" />
     <Compile Include="Models\Entities\Genre.cs" />
     <Compile Include="Models\Entities\Season.cs" />
     <Compile Include="Models\Entities\Show.cs" />

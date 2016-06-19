@@ -9,7 +9,8 @@ namespace StreamSearch.Models.Entities
 {
     public class Movie : Video
     {
-        public int Year { get; set; }
+        public int? Year { get; set; }
+        public string Link { get; set; }
         public string Rating { get; set; }
     }
 }
