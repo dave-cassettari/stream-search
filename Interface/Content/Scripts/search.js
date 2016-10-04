@@ -23,7 +23,7 @@ $(function () {
             }
 
             var data = {
-                page: 1,
+                page: 0,
                 term: term,
             };
 

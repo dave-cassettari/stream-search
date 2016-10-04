@@ -1,18 +1,17 @@
-﻿using StreamSearch.Common.Models.Entities;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using StreamSearch.Common.Models.Entities;
 
 namespace StreamSearch.Common.Models.Contexts
 {
-    public class DatabaseContext:DbContext
+    public class DatabaseContext : DbContext
     {
         public DatabaseContext()
             : base("DefaultConnection")
@@ -23,6 +22,11 @@ namespace StreamSearch.Common.Models.Contexts
             //var initialiser = new MigrateDatabaseToLatestVersion<DatabaseContext, DatabaseConfiguration>();
 
             System.Data.Entity.Database.SetInitializer<DatabaseContext>(initialiser);
+
+            Database.Log = (s) =>
+            {
+                Debug.WriteLine(s);
+            };
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
