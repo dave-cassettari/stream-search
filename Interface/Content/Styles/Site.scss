@@ -1,0 +1,22 @@
+﻿
+
+.material-icons
+{
+    color: #01579b !important;
+
+    &.active
+    {
+        color: #fff !important;
+    }
+}
+
+#input-search
+{
+    margin-top: 4px;
+
+    input
+    {
+        margin: 0 0 0 2rem;
+        font-size: 26px;
+    }
+}

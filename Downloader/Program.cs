@@ -1,16 +1,15 @@
-﻿using HtmlAgilityPack;
-using Newtonsoft.Json;
-using StreamSearch.Models.Contexts;
-using StreamSearch.Models.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
+using Newtonsoft.Json;
+using StreamSearch.Common.Models.Contexts;
+using StreamSearch.Common.Models.Entities;
 
-namespace StreamSearch
+namespace StreamSearch.Downloader
 {
     public class Program
     {
@@ -28,7 +27,7 @@ namespace StreamSearch
                 {
                     while (valid)
                     {
-                        Debug.WriteLine("Downloading {0}, page {1:00}, after {2}", letter, index, timer.Elapsed);
+                        Log("Downloading {0}, page {1:00}, after {2}", letter, index, timer.Elapsed);
 
                         var url = string.Format("http://putlocker.is/a-z/{1}/{0}.html", letter, index);
 
@@ -76,7 +75,7 @@ namespace StreamSearch
                         }
                         catch (Exception ex)
                         {
-                            Debug.WriteLine(ex.Message);
+                            Log(ex.Message);
 
                             valid = false;
                         }
@@ -196,7 +195,7 @@ namespace StreamSearch
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Log(ex.Message);
 
                 return false;
             }
@@ -301,7 +300,7 @@ namespace StreamSearch
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    Log(ex.Message);
                 }
             }
         }
@@ -384,6 +383,12 @@ namespace StreamSearch
         private static string GetNumeric(string input)
         {
             return new string(input.Where(c => char.IsDigit(c) || c == '-').ToArray());
+        }
+
+        private static void Log(string format, params object[] args)
+        {
+            Debug.WriteLine(format, args);
+            Console.WriteLine(format, args);
         }
 
         private class MetaResponse
