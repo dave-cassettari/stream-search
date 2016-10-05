@@ -120,7 +120,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\Api\AbstractApiModel.cs" />
+    <Compile Include="Controllers\Api\EpisodeApiModel.cs" />
+    <Compile Include="Controllers\Api\SeasonApiModel.cs" />
+    <Compile Include="Controllers\Api\VideoApiModel.cs" />
+    <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\Results\JsonNetResult.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,6 +164,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Application\Search.cshtml" />
+    <Content Include="Views\Application\Watch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

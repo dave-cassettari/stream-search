@@ -3,7 +3,7 @@ $(function () {
 
     var searchTimeout = null,
         searchViewModel = {
-            term: ko.observable('test'),
+            term: ko.observable(),
             results: ko.observableArray(),
         };
 
@@ -15,9 +15,11 @@ $(function () {
 
         searchTimeout = setTimeout(function () {
 
+            var results = searchViewModel.results;
+
             if (term == null || term == '') {
 
-                searchViewModel.results.removeAll();
+                results.removeAll();
 
                 return;
             }
@@ -29,11 +31,14 @@ $(function () {
 
             $.post('/api/search', data, function (response) {
 
-                console.log(response);
+                results.removeAll();
+
+                for (var i = 0; i < response.length; i++) {
+                    results.push(response[i]);
+                }
             });
         }, 250);
     });
 
     ko.applyBindings(searchViewModel);
-
 });

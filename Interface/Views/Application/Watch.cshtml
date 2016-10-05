@@ -1,0 +1,12 @@
+﻿@model WatchViewModel
+@using StreamSearch.Interface.Views.Application
+@{
+    var video = Model.Video;
+
+    Title = video.Title;
+}
+<div class="video-container">
+    <video class="responsive-video" controls>
+        <source src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" type="video/mp4">
+    </video>
+</div>

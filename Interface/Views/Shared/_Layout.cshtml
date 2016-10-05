@@ -21,21 +21,35 @@
         <nav class="top-nav light-blue">
             <div class="container">
                 <div class="row">
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s12" id="input-search">
-                                <i class="material-icons prefix">search</i>
-                                <input id="search-value" type="text" data-bind="value: term, valueUpdate: 'keyup'">
-                            </div>
-                        </div>
-                    </form>
+                    <div class="input-field col s12" id="input-search">
+                        <i class="material-icons prefix">search</i>
+                        <input id="search-value" type="text" autocomplete="off" data-bind="value: term, valueUpdate: 'keyup'">
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
     <main>
         <div class="container">
-            <span data-bind="text:term"></span>
+            <div class="cards" data-bind="foreach: results">
+                <div class="card-wrapper">
+                    <div class="card horizontal card-result">
+                        <div class="card-image" data-bind="visible: cover != null">
+                            <img src="#" data-bind="attr: {src: cover}">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title" data-bind="text: title"></span>
+                            </div>
+                            <div class="card-action">
+                                <a href="#" data-bind="attr: { href: '/' + id }, visible: seasons == null">Watch Now</a>
+                                <a href="#" data-bind="attr: { href: '/' + id }, visible: seasons != null">Choose Episode</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @RenderBody()
         </div>
     </main>

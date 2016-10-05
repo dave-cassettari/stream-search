@@ -1,42 +1,41 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using StreamSearch.Common.Models.Contexts;
 using StreamSearch.Common.Models.Entities;
+using StreamSearch.Interface.Controllers.Api;
 using StreamSearch.Interface.Views.Api;
 
 namespace StreamSearch.Interface.Controllers
 {
     [RoutePrefix("api")]
-    public class ApiController : Controller
+    public class ApiController : AbstractController
     {
-        public const int DefaultPageSize = 10;
+        public const int DefaultPageSize = 20;
 
         [HttpPost]
         [Route("search")]
         public ActionResult Search(SearchFormModel form)
         {
-            Video[] results;
-
             if (string.IsNullOrWhiteSpace(form.Term))
             {
-                results = new Video[0];
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
             }
-            else
+
+            using (var context = new DatabaseContext())
             {
-                using (var context = new DatabaseContext())
-                {
-                    var term = form.Term.Trim().ToUpper();
+                var term = form.Term.Trim().ToUpper();
+                var results = context.Set<Video>()
+                    .Where(x => x.Title.ToUpper().Contains(term))
+                    .OrderBy(x => x.Title)
+                    .Skip(form.Page * DefaultPageSize)
+                    .Take(DefaultPageSize)
+                    .ToArray()
+                    .Select(x => new VideoApiModel(x))
+                    .ToArray();
 
-                    results = context.Set<Video>()
-                        .Where(x => x.Title.ToUpper().Contains(term))
-                        .OrderBy(x => x.Title)
-                        .Skip(form.Page * DefaultPageSize)
-                        .Take(DefaultPageSize)
-                        .ToArray();
-                }
+                return Json(results);
             }
-
-            return Json(results);
         }
     }
 }
