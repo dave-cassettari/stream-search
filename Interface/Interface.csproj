@@ -136,6 +136,7 @@
     <Compile Include="Views\Application\ViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\Scripts\search.js" />
     <Content Include="Content\Scripts\Vendor\jquery-3.1.1.js" />
     <Content Include="Content\Scripts\Vendor\knockout-3.4.0.js" />
@@ -165,6 +166,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Application\Search.cshtml" />
     <Content Include="Views\Application\Watch.cshtml" />
+    <Content Include="Views\Application\Episodes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

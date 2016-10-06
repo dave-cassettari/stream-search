@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace StreamSearch.Common.Models.Entities
 {
     public abstract class Video : Entity
     {
-        public string Page { get; set; }
-        public string Title { get; set; }
-        public string Cover { get; set; }
-        public string Synopsis { get; set; }
+        public virtual string Page { get; set; }
+        public virtual string Link { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string Cover { get; set; }
+        public virtual string Synopsis { get; set; }
 
         public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }

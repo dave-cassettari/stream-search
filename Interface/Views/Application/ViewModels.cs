@@ -7,6 +7,11 @@ namespace StreamSearch.Interface.Views.Application
 
     }
 
+    public class EpisodesViewModel
+    {
+        public Show Show { get; set; }
+    }
+
     public class WatchViewModel
     {
         public Video Video { get; set; }

@@ -7,28 +7,63 @@ namespace StreamSearch.Interface.Controllers
 {
     public class ApplicationController : AbstractController
     {
+        private readonly DatabaseContext _context;
+
+        public ApplicationController()
+        {
+            _context = new DatabaseContext();
+        }
+
         [Route]
         public ActionResult Search()
         {
             return View(new SearchViewModel());
         }
 
-        [Route("{videoID:int}")]
+        [Route("watch/{videoID:int}")]
         public ActionResult Watch(int videoID)
         {
-            using (var context = new DatabaseContext())
+            var video = _context.Set<Video>().Find(videoID);
+
+            if (video == null)
             {
-                var video = context.Set<Video>().Find(videoID);
+                return HttpNotFound();
+            }
 
-                if (video == null)
+            return View(new WatchViewModel()
+            {
+                Video = video,
+            });
+        }
+
+        [Route("episodes/{showID:int}")]
+        public ActionResult Episodes(int showID)
+        {
+            var show = _context.Set<Show>().Find(showID);
+
+            if (show == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new EpisodesViewModel()
+            {
+                Show = show,
+            });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (disposing)
                 {
-                    return HttpNotFound();
+                    _context.Dispose();
                 }
-
-                return View(new WatchViewModel()
-                {
-                    Video = video,
-                });
+            }
+            finally
+            {
+                base.Dispose(disposing);
             }
         }
     }

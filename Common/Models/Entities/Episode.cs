@@ -1,50 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StreamSearch.Common.Models.Entities
 {
-    public class Episode : Entity
+    public class Episode : Video
     {
         public int Order { get; set; }
-        public string Page { get; set; }
-        public string Link { get; set; }
-        public string Title { get; set; }
-        public string Synopsis { get; set; }
 
         [Required]
         public virtual Season Season { get; set; }
 
-        [NotMapped]
         public Show Show
         {
             get { return Season.Show; }
         }
 
-        [NotMapped]
-        public string Cover
+        public override string Cover
         {
             get { return Show.Cover; }
         }
 
-        [NotMapped]
-        public ICollection<Actor> Actors
+        public override ICollection<Actor> Actors
         {
             get { return Show.Actors; }
         }
 
-        [NotMapped]
-        public ICollection<Genre> Genres
+        public override ICollection<Genre> Genres
         {
             get { return Show.Genres; }
         }
 
-        [NotMapped]
-        public ICollection<Director> Directors
+        public override ICollection<Director> Directors
         {
             get { return Show.Directors; }
         }

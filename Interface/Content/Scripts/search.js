@@ -41,4 +41,8 @@ $(function () {
     });
 
     ko.applyBindings(searchViewModel);
+
+    //searchViewModel.term('family');
+
+    $('body').removeClass('no-knockout');
 });

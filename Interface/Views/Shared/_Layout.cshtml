@@ -16,7 +16,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+<body class="no-knockout">
     <header class="navbar-fixed">
         <nav class="top-nav light-blue">
             <div class="container">
@@ -31,7 +31,7 @@
     </header>
     <main>
         <div class="container">
-            <div class="cards" data-bind="foreach: results">
+            <div class="cards" data-bind="foreach: results, visible: results().length > 0">
                 <div class="card-wrapper">
                     <div class="card horizontal card-result">
                         <div class="card-image" data-bind="visible: cover != null">
@@ -42,8 +42,8 @@
                                 <span class="card-title" data-bind="text: title"></span>
                             </div>
                             <div class="card-action">
-                                <a href="#" data-bind="attr: { href: '/' + id }, visible: seasons == null">Watch Now</a>
-                                <a href="#" data-bind="attr: { href: '/' + id }, visible: seasons != null">Choose Episode</a>
+                                <a href="#" data-bind="attr: { href: '/watch/' + id }, visible: seasons == null">Watch Now</a>
+                                <a href="#" data-bind="attr: { href: '/episodes/' + id }, visible: seasons != null">Choose Episode</a>
                             </div>
                         </div>
                     </div>
