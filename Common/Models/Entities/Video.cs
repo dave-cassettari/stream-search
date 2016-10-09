@@ -4,7 +4,6 @@ namespace StreamSearch.Common.Models.Entities
 {
     public abstract class Video : Entity
     {
-        public virtual string Page { get; set; }
         public virtual string Link { get; set; }
         public virtual string Title { get; set; }
         public virtual string Cover { get; set; }
