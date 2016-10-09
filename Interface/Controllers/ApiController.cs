@@ -3,10 +3,10 @@ using System.Net;
 using System.Web.Mvc;
 using StreamSearch.Common.Models.Contexts;
 using StreamSearch.Common.Models.Entities;
-using StreamSearch.Interface.Controllers.Api;
-using StreamSearch.Interface.Views.Api;
+using StreamSearch.Web.Controllers.Api;
+using StreamSearch.Web.Views.Api;
 
-namespace StreamSearch.Interface.Controllers
+namespace StreamSearch.Web.Controllers
 {
     [RoutePrefix("api")]
     public class ApiController : AbstractController

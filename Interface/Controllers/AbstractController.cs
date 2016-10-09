@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using StreamSearch.Interface.Controllers.Results;
+using StreamSearch.Web.Controllers.Results;
 
-namespace StreamSearch.Interface.Controllers
+namespace StreamSearch.Web.Controllers
 {
     public abstract class AbstractController : Controller
     {

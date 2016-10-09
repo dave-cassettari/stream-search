@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using StreamSearch.Common.Models.Contexts;
 using StreamSearch.Common.Models.Entities;
-using StreamSearch.Interface.Views.Application;
+using StreamSearch.Web.Views.Application;
 
-namespace StreamSearch.Interface.Controllers
+namespace StreamSearch.Web.Controllers
 {
     public class ApplicationController : AbstractController
     {

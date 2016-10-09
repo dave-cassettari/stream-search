@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using StreamSearch.Common.Models.Entities;
 
-namespace StreamSearch.Interface.Controllers.Api
+namespace StreamSearch.Web.Controllers.Api
 {
     public abstract class AbstractApiModel<T>
         where T : Entity

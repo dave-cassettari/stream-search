@@ -63,6 +63,7 @@
     <Compile Include="Models\Entities\Movie.cs" />
     <Compile Include="Models\Entities\Season.cs" />
     <Compile Include="Models\Entities\Show.cs" />
+    <Compile Include="Models\Entities\Source.cs" />
     <Compile Include="Models\Entities\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

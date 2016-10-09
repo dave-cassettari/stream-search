@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace StreamSearch.Interface.Views
+namespace StreamSearch.Web.Views
 {
     public abstract class AbstractViewPage<TModel> : WebViewPage<TModel>
     {

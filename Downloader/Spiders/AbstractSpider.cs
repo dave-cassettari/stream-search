@@ -4,7 +4,6 @@ using StreamSearch.Common.Models.Contexts;
 using StreamSearch.Common.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 
@@ -157,6 +156,25 @@ namespace StreamSearch.Downloader.Spiders
             }
 
             return entity;
+        }
+
+        protected Source AddOrUpdate(DatabaseContext context, Video video, string link)
+        {
+            var source = video.Sources.FirstOrDefault(x => x.Link == link);
+
+            if (source == null)
+            {
+                source = new Source()
+                {
+                    Link = link,
+                    Video = video,
+                    Quality = 0,
+                };
+
+                video.Sources.Add(source);
+            }
+
+            return source;
         }
 
         protected string GetNumeric(string input)

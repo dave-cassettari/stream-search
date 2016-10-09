@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace StreamSearch.Interface
+namespace StreamSearch.Web
 {
     public class RouteConfig
     {

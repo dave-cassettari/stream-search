@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace StreamSearch.Interface
+namespace StreamSearch.Web
 {
     public class FilterConfig
     {

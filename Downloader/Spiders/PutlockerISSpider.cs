@@ -78,12 +78,10 @@ namespace StreamSearch.Downloader.Spiders
 
                 if (source != null)
                 {
-                    var movie = AddOrUpdate<Movie>(context, url);
-
-                    movie.Link = source;
-                    movie.Title = title;
+                    var movie = AddOrUpdate<Movie>(context, title);
 
                     AddMeta(context, movie);
+                    AddOrUpdate(context, movie, source);
 
                     return true;
                 }
@@ -154,9 +152,10 @@ namespace StreamSearch.Downloader.Spiders
                                     season.Episodes.Add(episode);
                                 }
 
-                                episode.Link = episodeVideo;
-                                episode.Order = index;
                                 episode.Title = clean;
+                                episode.Order = index;
+
+                                AddOrUpdate(context, episode, episodeVideo);
 
                                 ++index;
                             }

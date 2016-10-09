@@ -2,6 +2,7 @@
 using StreamSearch.Common.Models.Contexts;
 using StreamSearch.Common.Models.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
@@ -13,7 +14,8 @@ namespace StreamSearch.Downloader.Spiders
         {
             using (var client = new WebClient())
             {
-                var url = string.Format("http://putlocker9.com/azlist/page/{1}?latter={0}", letter, index);
+                //var url = string.Format("http://putlocker9.com/azlist/page/{1}?latter={0}", letter, index);
+                var url = "http://putlocker9.com/?s=friends&submit=Search+Now%21";
                 var page = client.DownloadString(url);
                 var document = new HtmlDocument();
 
@@ -26,34 +28,43 @@ namespace StreamSearch.Downloader.Spiders
                     return false;
                 }
 
+                var isValid = false;
+
                 using (var context = new DatabaseContext())
                 {
                     foreach (var item in items)
                     {
-                        var link = item.Descendants("a").FirstOrDefault();
-
-                        if (link == null)
+                        try
                         {
-                            continue;
+                            var link = item.Descendants("a").FirstOrDefault();
+
+                            if (link == null)
+                            {
+                                continue;
+                            }
+
+                            var image = link.Descendants("img").FirstOrDefault();
+
+                            if (image == null)
+                            {
+                                continue;
+                            }
+
+                            var href = link.Attributes["href"].Value;
+                            var title = image.Attributes["alt"].Value;
+
+                            isValid = FindVideos(context, href, title) || isValid;
                         }
-
-                        var image = link.Descendants("img").FirstOrDefault();
-
-                        if (image == null)
+                        catch (Exception ex)
                         {
-                            continue;
+
                         }
-
-                        var href = link.Attributes["href"].Value;
-                        var title = image.Attributes["alt"].Value;
-
-                        FindVideos(context, href, title);
                     }
 
                     context.SaveChanges();
                 }
 
-                return true;
+                return isValid;
             }
         }
 
@@ -70,16 +81,18 @@ namespace StreamSearch.Downloader.Spiders
                     document.LoadHtml(page);
                 }
 
-                var source = FindSource(document.DocumentNode);
+                var sources = FindSources(document.DocumentNode);
 
-                if (source != null)
+                if (sources.Any())
                 {
-                    var movie = AddOrUpdate<Movie>(context, url);
-
-                    movie.Link = source;
-                    movie.Title = title;
+                    var movie = AddOrUpdate<Movie>(context, title);
 
                     AddMeta(context, movie);
+
+                    foreach (var source in sources)
+                    {
+                        AddOrUpdate(context, movie, source);
+                    }
 
                     return true;
                 }
@@ -93,9 +106,7 @@ namespace StreamSearch.Downloader.Spiders
                     if (seasons.Any())
                     {
                         var order = 1;
-                        var show = AddOrUpdate<Show>(context, url);
-
-                        show.Title = title;
+                        var show = AddOrUpdate<Show>(context, title);
 
                         AddMeta(context, show);
 
@@ -126,17 +137,7 @@ namespace StreamSearch.Downloader.Spiders
                                     continue;
                                 }
 
-                                var episodeUrl = link.Attributes["href"].Value;
-                                var episodeVideo = FindSource(episodeUrl);
-
-                                if (episodeVideo == null)
-                                {
-                                    continue;
-                                }
-
-                                var name = link.NextSibling;
-                                var text = Uri.UnescapeDataString(name.InnerText);
-                                var clean = text.Replace("&nbsp;-", "").Replace("&nbsp;", "").Trim();
+                                var clean = link.GetAttributeValue("title", string.Empty).Trim();
                                 var episode = season.Episodes.FirstOrDefault(x => x.Title == clean);
 
                                 if (episode == null)
@@ -150,9 +151,15 @@ namespace StreamSearch.Downloader.Spiders
                                     season.Episodes.Add(episode);
                                 }
 
-                                episode.Link = episodeVideo;
                                 episode.Order = index;
-                                episode.Title = clean;
+
+                                var episodeUrl = link.Attributes["href"].Value;
+                                var episodeSources = FindSources(episodeUrl);
+
+                                foreach (var episodeSource in episodeSources)
+                                {
+                                    AddOrUpdate(context, episode, episodeSource);
+                                }
 
                                 ++index;
                             }
@@ -174,7 +181,7 @@ namespace StreamSearch.Downloader.Spiders
             }
         }
 
-        private string FindSource(string url)
+        private IEnumerable<string> FindSources(string url)
         {
             var document = new HtmlDocument();
 
@@ -185,27 +192,25 @@ namespace StreamSearch.Downloader.Spiders
                 document.LoadHtml(page);
             }
 
-            return FindSource(document.DocumentNode);
+            return FindSources(document.DocumentNode);
         }
 
-        private string FindSource(HtmlNode documentNode)
+        private IEnumerable<string> FindSources(HtmlNode documentNode)
         {
-            var videos = documentNode.SelectNodes("//div[@class='video']");
+            var videoNodes = documentNode.SelectNodes("//iframe");
 
-            if (videos != null)
+            if (videoNodes != null)
             {
-                foreach (var video in videos)
+                foreach (var videoNode in videoNodes)
                 {
-                    var source = ParseSource(video);
+                    var source = videoNode.GetAttributeValue("SRC", null);
 
                     if (source != null)
                     {
-                        return source;
+                        yield return source;
                     }
                 }
             }
-
-            return null;
         }
     }
 }

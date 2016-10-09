@@ -1,5 +1,5 @@
 ﻿
-namespace StreamSearch.Interface.Views.Api
+namespace StreamSearch.Web.Views.Api
 {
     public class SearchFormModel
     {

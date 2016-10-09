@@ -1,6 +1,6 @@
 ﻿using StreamSearch.Common.Models.Entities;
 
-namespace StreamSearch.Interface.Views.Application
+namespace StreamSearch.Web.Views.Application
 {
     public class SearchViewModel
     {

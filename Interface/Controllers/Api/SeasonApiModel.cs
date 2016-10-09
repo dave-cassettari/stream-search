@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using StreamSearch.Common.Models.Entities;
 
-namespace StreamSearch.Interface.Controllers.Api
+namespace StreamSearch.Web.Controllers.Api
 {
     public class SeasonApiModel : AbstractApiModel<Season>
     {

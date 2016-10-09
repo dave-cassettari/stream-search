@@ -15,10 +15,10 @@ namespace StreamSearch.Common.Models.Entities
             get { return Season.Show; }
         }
 
-        public override string Cover
-        {
-            get { return Show.Cover; }
-        }
+        //public override string Cover
+        //{
+        //    get { return Show.Cover; }
+        //}
 
         public override ICollection<Actor> Actors
         {

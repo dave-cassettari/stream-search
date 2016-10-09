@@ -3,7 +3,7 @@ using System.IO;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 
-namespace StreamSearch.Interface.Controllers.Results
+namespace StreamSearch.Web.Controllers.Results
 {
     public class JsonNetResult : JsonResult
     {

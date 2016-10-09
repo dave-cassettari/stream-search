@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace StreamSearch.Interface
+namespace StreamSearch.Web
 {
     public class BundleConfig
     {
