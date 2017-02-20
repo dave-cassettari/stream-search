@@ -1,0 +1,72 @@
+$colour-background: #111111;
+$colour-foreground: #1e1f20;
+$colour-highlight: #3d3c3c;
+$colour-lowlight: #0B0B0B;
+$colour-text: #a0a0a0;
+
+body
+{
+    color: $colour-text;
+    background-color: $colour-background;
+}
+
+.wrapper
+{
+    padding: 95px 0 0;
+}
+
+.navbar
+{
+    background: $colour-foreground;
+    box-shadow: 0 0 5px $colour-lowlight;
+    border-bottom: 1px solid $colour-highlight;
+
+    .container
+    {
+        max-width: 600px;
+    }
+
+    .form-group
+    {
+        margin: 20px 0;
+    }
+}
+
+.videos
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.video
+{
+    max-width: 300px;
+    margin: 0 10px 20px;
+    padding: 0;
+    list-style: none;
+    background: $colour-foreground;
+    box-shadow: 0 0 5px $colour-lowlight;
+
+    .video-title
+    {
+        padding: 10px;
+        display: block;
+    }
+}
+
+.clearfix
+{
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    :after {
+        clear: both;
+    }
+}
