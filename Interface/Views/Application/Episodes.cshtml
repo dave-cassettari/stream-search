@@ -1,0 +1,21 @@
+﻿@model EpisodesViewModel
+@using StreamSearch.Interface.Views.Application
+@{
+    var show = Model.Show;
+
+    Title = string.Format("{0} Episodes", show.Title);
+}
+<div class="collection with-header">
+    @foreach (var season in show.Seasons.OrderBy(x => x.Order))
+    {
+        <h2 class="collection-header">
+            Season @season.Order
+        </h2>
+
+        foreach (var episode in season.Episodes.OrderBy(x => x.Order))
+        {
+            <a href="/watch/@episode.Id" class="collection-item">@episode.Title</a>
+        }
+    }
+</div>
+

@@ -1,0 +1,57 @@
+﻿@model object
+@{
+    var title = (Title ?? "Stream Search");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>@title</title>
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    @Styles.Render(BundleConfig.UrlStyles)
+    @Scripts.Render(BundleConfig.UrlScripts)
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="no-knockout">
+    <header class="navbar-fixed">
+        <nav class="top-nav light-blue">
+            <div class="container">
+                <div class="row">
+                    <div class="input-field col s12" id="input-search">
+                        <i class="material-icons prefix">search</i>
+                        <input id="search-value" type="text" autocomplete="off" data-bind="value: term, valueUpdate: 'keyup'">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="cards" data-bind="foreach: results, visible: results().length > 0">
+                <div class="card-wrapper">
+                    <div class="card horizontal card-result">
+                        <div class="card-image" data-bind="visible: cover != null">
+                            <img src="#" data-bind="attr: {src: cover}">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title" data-bind="text: title"></span>
+                            </div>
+                            <div class="card-action">
+                                <a href="#" data-bind="attr: { href: '/watch/' + id }, visible: seasons == null">Watch Now</a>
+                                <a href="#" data-bind="attr: { href: '/episodes/' + id }, visible: seasons != null">Choose Episode</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @RenderBody()
+        </div>
+    </main>
+</body>
+</html>
