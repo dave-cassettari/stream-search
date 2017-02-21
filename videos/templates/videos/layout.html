@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Search</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="{% static "videos/css/vendor/normalize-3.0.3.css" %}">
+    <link rel="stylesheet" href="{% static "videos/css/vendor/bootstrap-3.3.7.min.css" %}">
+    <link rel="stylesheet" href="{% static "videos/css/vendor/font-awesome-4.7.0.min.css" %}">
+    <link rel="stylesheet" href="{% static "videos/css/main.css" %}">
+
+    <script src="{% static "videos/js/vendor/jquery-1.12.0.min.js" %}"></script>
+    <script src="{% static "videos/js/application.js" %}"></script>
+</head>
+<body>
+
+    <header class="navbar navbar-fixed-top">
+        <div class="container">
+            <form action="{% url 'videos:index' %}" method="get">
+                <div class="form-group">
+                    <div class="input-group input-search">
+                        <span class="input-group-addon">
+                            <i class="fa fa-fw fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" id="input-search" name="search" value="{{search}}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

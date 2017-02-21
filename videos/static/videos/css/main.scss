@@ -44,12 +44,21 @@ body
 
 .video
 {
-    max-width: 300px;
+    max-width: 250px;
     margin: 0 10px 20px;
     padding: 0;
     list-style: none;
     background: $colour-foreground;
     box-shadow: 0 0 5px $colour-lowlight;
+    display: block;
+    overflow-x: hidden;
+
+    &:hover
+    {
+        background: $colour-highlight;
+        color: #fff;
+        text-decoration: none;
+    }
 
     .video-title
     {
@@ -68,5 +77,12 @@ body
 
     :after {
         clear: both;
+    }
+}
+
+@media (min-width: 768px)
+{
+    .container {
+        width: 100%;
     }
 }

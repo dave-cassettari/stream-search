@@ -1,0 +1,15 @@
+{% extends 'videos/layout.html' %}
+{% block content %}
+
+{% if videos %}
+<div class="videos">
+	{% for video in videos %}
+	<a href="{% url 'videos:watch' video.id %}" class="video">
+		<img src="http://lorempixel.com/300/150/abstract" class="video-cover" />
+		<span class="video-title">{{video.title}}</span>
+	</a>
+	{% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

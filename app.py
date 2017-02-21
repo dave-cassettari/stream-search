@@ -1,38 +1,33 @@
-# from flask import Flask
+# from sys import stdin
+# from services.LocalPlayer import LocalPlayer
 
-# app = Flask(__name__)
+# player = LocalPlayer()
 
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World 2'
+# player.play('E:\\Downloads\\SampleVideo_1280x720_5mb.mp4')
 
-from sys import stdin
-from services.LocalPlayer import LocalPlayer
+# while True:
+# 	input = stdin.readline().strip()
 
-player = LocalPlayer()
+# 	if (input == 'q'):
+# 		break;
 
-player.play('E:\\Downloads\\SampleVideo_1280x720_5mb.mp4')
+# 	if (input == 's'):
+# 		player.stop();
 
-while True:
-	input = stdin.readline().strip()
+# 	if (input == 'p'):
+# 		player.pause();
 
-	if (input == 'q'):
-		break;
+# 	if (input == 'i'):
+# 		player.status();
 
-	if (input == 's'):
-		player.stop();
+# 	if (input == '1'):
+# 		player.play('E:\\Downloads\\SampleVideo_1280x720_5mb.mp4');
 
-	if (input == 'p'):
-		player.pause();
+# 	if (input == '2'):
+# 		player.play('http://185.45.14.36/kj2vy7ocem6vtaw52bnz4kwhfff6n2wjk2nonuva3t4gbwep2goewo5syiva/v.mp4');
 
-	if (input == 'i'):
-		player.status();
 
-	if (input == '1'):
-		player.play('E:\\Downloads\\SampleVideo_1280x720_5mb.mp4');
 
-	if (input == '2'):
-		player.play('http://185.45.14.36/kj2vy7ocem6vtaw52bnz4kwhfff6n2wjk2nonuva3t4gbwep2goewo5syiva/v.mp4');
 
 # import numpy as np
 # import cv2
